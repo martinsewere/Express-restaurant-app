@@ -4,8 +4,8 @@
 	<title></title>
 
 	<link rel=“stylesheet” href=“https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css“>
-	<script src=“https://code.jquery.com/jquery.js”></script>
-	<script src=“https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js”></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -25,8 +25,8 @@
 		</div>
 
 
-		<div class=“row”>
-			<div class=“col-lg-12">
+		<div class="row">
+			<div class="col-lg-12">
 
 				<div class=“panel panel-default”>
 					<div class=“panel-heading”>
@@ -65,29 +65,29 @@
 </body>
 <script type=“text/javascript”>
 
-	$(“.submit”).on(“click”, function() {
+	$(".submit").on("click", function() {
 
 		event.preventDefault();
 
 		var newReservation = {
 
-			name: $(“#res-name”).val().trim(),
-			phone: $(“#res-phone”).val().trim(),
-			email: $(“#res-email”).val().trim(),
+			name: $("#res-name").val().trim(),
+			phone: $("#res-phone").val().trim(),
+			email: $("#res-email").val().trim(),
 		}
 
-		$.post(“/api/newReservation”, newReservation, 
+		$.post("/api/newReservation", newReservation, 
 			function(data){
 
 				if (data.onWaitlist) {
-					alert(“Sorry, we’re packed, get used to it”)
+					alert("Sorry, we’re packed, get used to it")
 				} else {
-					alert(“You got a table, congratulations”)
+					alert("You got a table, congratulations")
 				}
 
-				$(“#res-name”).val(“”);
-				$(“#res-phone”).val(“”);
-				$(“#res-email”).val(“”);
+				$("#res-name").val("");
+				$("#res-phone").val("");
+				$("#res-email").val("");
 			});
 	})
 

@@ -25,18 +25,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Routes
 // The default or Home page
 app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "views/index.html"));
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 
 // The tables page that will hold tables
 app.get("/tables", function(req, res) {
-  res.sendFile(path.join(__dirname, "views/tables.html"));
+  res.sendFile(path.join(__dirname, "tables.html"));
 });
 
 // The 
 app.get("/reserve", function(req, res) {
-  res.sendFile(path.join(__dirname, "views/reserve.html"));
+  res.sendFile(path.join(__dirname, "reserve.html"));
 });
 
 // Listen function at given port; in this case, port variable is process.env.PORT || 3000;
