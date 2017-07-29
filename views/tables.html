@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tables Page</title>
+
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="jumbotron">
+      <h1> Tables!!!</h1>
+      <br>
+
+      <div class="text-center">
+        <a href="/reserve"><button type="button" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-credit-card"></span> Make Reservation</button></a>
+        <a href="/"><button type="button" class="btn btn-lg btn-default">Go Home Felicia<span class="glyphicon glyphicon-home"></span></button></a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+
+       
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">Current Reservations</h4>
+          </div>
+          <div class="panel-body" id="tableDiv">
+          </div>
+        </div>
+
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">Waiting List</h4>
+          </div>
+          <div class="panel-body" id="waitlistDiv">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+
+<script type="text/javascript">
+
+    function tableQuery() {
+
+
+      var currentURL = window.location.origin;
+
+
+      $.ajax({ url: currentURL + "/api/tables", method: "GET" })
+      .done(function(tables) {
+
+        for (var i = 0; i < tables.length; i++) {
+
+          
+          var tableDiv = $("<div>");
+          tableDiv.addClass("well");
+          tableDiv.attr("id", "tableTag-" + i + 1);
+          $("#tableDiv").append(tableDiv);
+
+          var tableNum = i + 1;
+
+          $("#tableTag-" + i + 1).append("<h2><span class='label label-primary'>" + tableNum + "</span> | " + tables[i].uniqueId + "</h2>");
+        }
+      });
+    }
+
+    function waitListQuery() {
+
+      var currentURL = window.location.origin;
+
+      $.ajax({ url: currentURL + "/api/waitlist", method: "GET" })
+      .done(function(waitlist) {
+
+
+        for (var i = 0; i < waitlist.length; i++) {
+
+
+          var waitlistDiv = $("<div>");
+          waitlistDiv.addClass("well");
+          waitlistDiv.attr("id", "waitlistTag-" + i + 1);
+          $("#waitlistDiv").append(waitlistDiv);
+
+          var tableNum = i + 1;
+
+          $("#waitlistTag-" + i + 1).append("<h2><span class='label label-primary'>" + tableNum + "</span> | " + waitlist[i].uniqueId + "</h2>");
+        }
+      });
+    }
+
+    tableQuery();
+    waitListQuery();
+
+
+</script>
+</html>
