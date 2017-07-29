@@ -1,9 +1,10 @@
-
 // Initialize required packages
 
 var express = require("express");
 var path = require("path");
 var bodyParser = require("body-parser");
+// var mailer = require("/node_modules/mailer/lib/node_mailer");
+
 
 
 // Express set up
@@ -11,7 +12,22 @@ var app = express();
 var port = process.env.PORT || 3000;
 
 // Global variables
-var tables = [];
+var tables = [{
+    name: "Michael",
+    phone: "6514429511", 
+    email: "michael.t.halvorson@gmail.com",
+    uniqueId: -16
+  },{
+    name: "George",
+    phone: "5555555555", 
+    email: "gcyoosf@gmail.com",
+    uniqueId: -15
+  },{
+    name: "Martins",
+    phone: "3333333333", 
+    email: "martins@gmail.com",
+    uniqueId: -14
+  }];
 var waitlist = [];
 var incrementer = 0;
 
@@ -49,6 +65,7 @@ app.listen(port, function() {
 
 // Tables (get)
 app.get('/api/tables', function(req, res) {
+  console.log(tables);
 	return res.json(tables);
 });
 
@@ -60,11 +77,18 @@ app.get('/api/waitlist', function(req, res) {
 // New Reservation (post)
 app.post('/api/newReservation', function(req, res) {
 	var newTable = req.body;
+  var isWaitlist;
   newTable.uniqueId = incrementer++;
   if (tables.length < 5) {
+    newTable.isWaitlist = 0; //Attaching your property to your Object(newTable)
   	tables.push(newTable);
+    // alert("You got a table, congratulations")
+    
+
   } else {
+    newTable.isWaitlist = 1;
     waitlist.push(newTable);
+    // alert("Sorry, we’re packed, get used to it")
   }
   res.json(newTable);
 });
@@ -92,6 +116,7 @@ app.get('/api/seed', function(req, res) {
     email: "martins@gmail.com",
     uniqueId: -14
   }];
+
   var waitlistSeed = [{
     name: "MartinsWaitlist",
     phone: "3333333333", 
@@ -110,3 +135,5 @@ app.get('/api/seed', function(req, res) {
     waitlist.push(obj);
   });
 });
+
+// console.log(tables);

@@ -3,24 +3,24 @@
 <head>
 	<title></title>
 
-	<link rel=“stylesheet” href=“https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css“>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
 <body>
 
 
-	<div class=“container”>
+	<div class="container">
 		
-		<div class=“jumbotron”>
+		<div class="jumbotron">
 			
 			<h1>Reserve a table</h1>
 		
 
-			<div class=“text-center” id=“control-console”>
-				<a href=“/tables”><button type=“button” class=“btn btn-lg btn-primary”><span class=“glyphicon glyphicon-list-alt”></span> View Tables</button></a>
+			<div class="text-center" id="control-console">
+				<a href="/tables"><button type="button" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-list-alt"></span> View Tables</button></a>
 
-				<a href=“/reserve”><button type=“button” class=“btn btn-lg btn-danger”><span class=“glyphicon glyphicon-credit-card”></span> Make Reservation</button></a>
+				<a href="/reserve"><button type="button" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-credit-card"></span> Make Reservation</button></a>
 			</div>
 		</div>
 
@@ -28,30 +28,30 @@
 		<div class="row">
 			<div class="col-lg-12">
 
-				<div class=“panel panel-default”>
-					<div class=“panel-heading”>
-						<h4 class=“panel-title”>Table Reservation</h4>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">Table Reservation</h4>
 					</div>
-					<div class=“panel-body”>
+					<div class="panel-body">
 
-						<form role=“form”>
+						<form role="form">
 
-							<div class=“form-group”>
-								<label for=“res-name”>Name</label>
-								<input type=“text” class=“form-control” id=“res-name”>
+							<div class="form-group">
+								<label for="res-name">Name</label>
+								<input type="text" class="form-control" id="res-name">
 							</div>
 
-							<div class=“form-group”>
-								<label for=“res-phone”>Phone Number</label>
-								<input type=“text” class=“form-control” id=“res-phone”>
+							<div class="form-group">
+								<label for="res-phone">Phone Number</label>
+								<input type="text" class="form-control" id="res-phone">
 							</div>
 
-							<div class=“form-group”>
-								<label for=“res-email”>Email</label>
-								<input type=“text” class=“form-control” id=“res-email”>
+							<div class="form-group">
+								<label for="res-email">Email</label>
+								<input type="text" class="form-control" id="res-email">
 							</div>
 
-							<button type=“submit” class=“btn btn-primary submit”>Submit</button>
+							<button type="submit" class="btn btn-primary submit">Submit</button>
 						</form>
 
 					</div>
@@ -63,7 +63,7 @@
 	</div>
 
 </body>
-<script type=“text/javascript”>
+<script type="text/javascript">
 
 	$(".submit").on("click", function() {
 
@@ -76,10 +76,12 @@
 			email: $("#res-email").val().trim(),
 		}
 
-		$.post("/api/newReservation", newReservation, 
-			function(data){
+		$.post("/api/newReservation", newReservation) 
+			.done(function(data) {
+				console.log(data);
 
-				if (data.onWaitlist) {
+				if (data.isWaitlist) {
+					console.log(data.onWaitlist)
 					alert("Sorry, we’re packed, get used to it")
 				} else {
 					alert("You got a table, congratulations")
