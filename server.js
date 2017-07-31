@@ -80,11 +80,9 @@ app.post('/api/newReservation', function(req, res) {
   var isWaitlist;
   newTable.uniqueId = incrementer++;
   if (tables.length < 5) {
-<<<<<<< HEAD
     newTable.isWaitlist = 0;
-=======
+
     newTable.isWaitlist = 0; //Attaching your property to your Object(newTable)
->>>>>>> ec1f761342c476cae2a11ac91437ab745bb0e828
   	tables.push(newTable);
     // alert("You got a table, congratulations")
     
